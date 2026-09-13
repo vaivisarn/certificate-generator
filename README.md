@@ -53,24 +53,28 @@ npm run preview
 npm test
 ```
 
-Runs the unit tests with Vitest.
+Runs the unit tests with Vitest: the Excel paste parser, ratio and resolution checks, mm maths, automatic shrink, file names and templates. GitHub Actions runs these before every deploy.
 
 ```bash
 npm run test:e2e
 ```
 
-Runs the end to end tests with Playwright. The first time, install the test browser with `npx playwright install chromium`.
+Runs the end to end tests with Playwright against the production build. They load the sample background, enter 500 mixed Thai and English names, export, and check that the PDF has 500 pages of exactly 841.89 x 595.28 pt, that short and long names are centred, and that long names shrink. They also check the per person ZIP, PNG export, Excel paste and templates. About 20 seconds.
+
+The tests use the Google Chrome installed on your computer. Without Chrome, run `npx playwright install chromium` once and then `PW_BUNDLED=1 npm run test:e2e`.
+
+A few exported pages are saved as PNG in `test-results/` so you can check the Thai marks by eye.
 
 ## Release
 
 1. Work on a branch such as `feat/date-field` or `fix/thai-marks`.
 2. Merge into `main` when it works. Every push to `main` deploys the live site.
-3. For a release, update the version and CHANGELOG:
+3. For a release, move the notes under "Unreleased" in `CHANGELOG.md` into a new version section and commit that.
+4. Bump the version. This needs a clean working tree:
    ```bash
-   npm version patch
+   npm version patch -m "chore: release v%s"
    ```
-   This bumps the version in `package.json`, commits, and creates a tag such as `v0.1.1`. Use `minor` instead of `patch` for new features.
-4. Move the notes under "Unreleased" in `CHANGELOG.md` into the new version section.
+   This sets the version in `package.json`, commits, and creates a tag such as `v0.1.1`. Use `minor` instead of `patch` for new features.
 5. Push the commit and the tag:
    ```bash
    git push --follow-tags

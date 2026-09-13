@@ -732,10 +732,91 @@ button {
   margin-top: 4px;
 }
 
-.export-placeholder {
+/* Export */
+
+.export {
   margin-top: 16px;
   padding-top: 14px;
   border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.export h3 {
+  font-size: 15px;
+}
+
+.export-summary {
+  margin: -4px 0 0;
+  font-size: 13px;
+}
+
+.export .messages:empty {
+  display: none;
+}
+
+.export .messages {
+  margin: 0;
+}
+
+.export-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button.export-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 9px 12px;
+  text-align: left;
+  white-space: normal;
+}
+
+button.export-button strong {
+  font-size: 14px;
+}
+
+button.export-button span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+button.export-button.primary span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.progress-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.15s linear;
 }
 
 .app-footer {

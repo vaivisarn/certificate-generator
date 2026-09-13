@@ -41,6 +41,8 @@ export interface CertificateState {
   customFontName: string | null
   /** Safe area, max width and anchor guides on the preview. */
   showGuides: boolean
+  /** Which name the preview shows, counting only rows that have a name. */
+  previewIndex: number
 }
 
 export const initialState: CertificateState = {
@@ -50,6 +52,7 @@ export const initialState: CertificateState = {
   nameLayer: defaultNameLayer,
   customFontName: null,
   showGuides: true,
+  previewIndex: 0,
 }
 
 export type UpdateState = (patch: Partial<CertificateState>) => void

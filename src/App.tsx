@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { BackgroundPanel } from './components/BackgroundPanel'
+import { ExportPanel } from './components/ExportPanel'
 import { NamesPanel } from './components/NamesPanel'
 import { PreviewPanel } from './components/PreviewPanel'
 import { StylePanel } from './components/StylePanel'
@@ -40,6 +41,7 @@ function App() {
             nameLayer={state.nameLayer}
             customFontName={state.customFontName}
             showGuides={state.showGuides}
+            previewIndex={state.previewIndex}
             update={update}
           />
         </section>
@@ -52,7 +54,13 @@ function App() {
             customFontName={state.customFontName}
             update={update}
           />
-          <p className="placeholder export-placeholder">Export buttons coming in step 7.</p>
+          <ExportPanel
+            background={state.background}
+            backgroundFit={state.backgroundFit}
+            names={state.names}
+            nameLayer={state.nameLayer}
+            previewIndex={state.previewIndex}
+          />
         </section>
       </main>
 

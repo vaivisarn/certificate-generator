@@ -11,13 +11,15 @@ export function drawBackground(
   bg: Background | null,
   fit: BackgroundFit,
   scale: number,
+  /** A sharper rendering to use instead of the preview, e.g. a PDF at 300 DPI. */
+  image: CanvasImageSource | undefined = bg?.preview,
 ): void {
   ctx.fillStyle = '#ffffff'
   ctx.fillRect(0, 0, PAGE_W_MM * scale, PAGE_H_MM * scale)
-  if (!bg) return
+  if (!bg || !image) return
 
   const rect = backgroundRect(bg.width, bg.height, fit)
   ctx.imageSmoothingEnabled = true
   ctx.imageSmoothingQuality = 'high'
-  ctx.drawImage(bg.preview, rect.x * scale, rect.y * scale, rect.w * scale, rect.h * scale)
+  ctx.drawImage(image, rect.x * scale, rect.y * scale, rect.w * scale, rect.h * scale)
 }

@@ -19,3 +19,6 @@ All notable changes to this project are listed here. Versions follow [Semantic V
 - Style controls: font, size in pt, colour, bold, maximum width with automatic shrink for long names, and a summary of how many names shrink.
 - Load a custom font file (for example TH Sarabun New), regular and bold. The file stays in the browser.
 - Warnings when the name crosses the safe area or the page edge.
+- Export: one combined PDF, a ZIP of one PDF per person (`001_Name.pdf`), a ZIP of 300 DPI PNGs, or a single PNG of the name in the preview. Progress bar, Cancel, and a size estimate for large PNG runs.
+- PDF pages are exactly A4 landscape (841.89 x 595.28 pt). The background is embedded once and reused on every page. Names are placed as 600 DPI images so Thai vowels and tone marks print exactly as previewed.
+- Rotated phone photos (EXIF) and unusual backgrounds are redrawn upright before they go into the PDF.

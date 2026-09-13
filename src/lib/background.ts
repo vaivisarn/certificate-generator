@@ -1,5 +1,3 @@
-import { ptToMm } from './geometry'
-
 export type BackgroundKind = 'png' | 'jpg' | 'pdf'
 
 export interface Background {
@@ -7,15 +5,20 @@ export interface Background {
   fileName: string
   /** Original file bytes, embedded once into exported PDFs. */
   bytes: ArrayBuffer
-  /** Source size: pixels for images, points for a PDF page. */
+  /** Source size: pixels for images, points for a PDF page (after rotation). */
   width: number
   height: number
-  /** Pixel size for images. Null for PDF, which is usually vector. */
-  pixelWidth: number | null
-  /** Drawable used for the on screen preview. */
+  /**
+   * Drawable used for the on screen preview. For images this is the full
+   * resolution picture, for a PDF a 150 DPI rendering.
+   */
   preview: ImageBitmap | HTMLCanvasElement
   /** Page count of a PDF. Only page 1 is used. */
   pageCount: number
+  /** Visible area of the PDF page in points, [x1, y1, x2, y2]. */
+  pdfView?: [number, number, number, number]
+  /** Rotation of the PDF page in degrees. */
+  pdfRotation?: number
 }
 
 export class BackgroundError extends Error {}
@@ -54,13 +57,16 @@ async function loadImage(fileName: string, kind: BackgroundKind, bytes: ArrayBuf
     bytes,
     width: bitmap.width,
     height: bitmap.height,
-    pixelWidth: bitmap.width,
     preview: bitmap,
     pageCount: 1,
   }
 }
 
-async function loadPdf(fileName: string, bytes: ArrayBuffer): Promise<Background> {
+/** Open a PDF with pdf.js, run `callback` on its first page, then close it. */
+async function withFirstPdfPage<T>(
+  bytes: ArrayBuffer,
+  callback: (page: import('pdfjs-dist').PDFPageProxy, pageCount: number) => Promise<T>,
+): Promise<T> {
   // pdf.js is large, so load it only when someone actually picks a PDF.
   const pdfjs = await import('pdfjs-dist')
   const { default: workerUrl } = await import('pdfjs-dist/build/pdf.worker.min.mjs?url')
@@ -68,39 +74,46 @@ async function loadPdf(fileName: string, bytes: ArrayBuffer): Promise<Background
 
   // pdf.js takes ownership of the buffer it is given, so pass a copy.
   const task = pdfjs.getDocument({ data: new Uint8Array(bytes.slice(0)) })
-  let doc
   try {
-    doc = await task.promise
-  } catch {
-    await task.destroy()
-    throw new BackgroundError(`"${fileName}" could not be opened. It may be damaged or password protected.`)
-  }
-
-  try {
-    const page = await doc.getPage(1)
-    const base = page.getViewport({ scale: 1 })
-    const viewport = page.getViewport({ scale: PDF_PREVIEW_DPI / 72 })
-    const canvas = document.createElement('canvas')
-    canvas.width = Math.round(viewport.width)
-    canvas.height = Math.round(viewport.height)
-    await page.render({ canvas, viewport }).promise
-
-    return {
-      kind: 'pdf',
-      fileName,
-      bytes,
-      width: base.width,
-      height: base.height,
-      pixelWidth: null,
-      preview: canvas,
-      pageCount: doc.numPages,
-    }
+    const doc = await task.promise
+    return await callback(await doc.getPage(1), doc.numPages)
   } finally {
     await task.destroy()
   }
 }
 
-/** Size of the PDF page in mm, for display. */
-export function pdfPageSizeMm(bg: Background): { w: number; h: number } {
-  return { w: ptToMm(bg.width), h: ptToMm(bg.height) }
+async function renderPage(page: import('pdfjs-dist').PDFPageProxy, dpi: number): Promise<HTMLCanvasElement> {
+  const viewport = page.getViewport({ scale: dpi / 72 })
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.round(viewport.width)
+  canvas.height = Math.round(viewport.height)
+  await page.render({ canvas, viewport }).promise
+  return canvas
+}
+
+async function loadPdf(fileName: string, bytes: ArrayBuffer): Promise<Background> {
+  try {
+    return await withFirstPdfPage(bytes, async (page, pageCount) => {
+      const base = page.getViewport({ scale: 1 })
+      const [x1, y1, x2, y2] = page.view
+      return {
+        kind: 'pdf',
+        fileName,
+        bytes,
+        width: base.width,
+        height: base.height,
+        preview: await renderPage(page, PDF_PREVIEW_DPI),
+        pageCount,
+        pdfView: [x1, y1, x2, y2],
+        pdfRotation: page.rotate,
+      }
+    })
+  } catch {
+    throw new BackgroundError(`"${fileName}" could not be opened. It may be damaged or password protected.`)
+  }
+}
+
+/** Render page 1 of a PDF background at a given resolution, for PNG export. */
+export function renderPdfBackground(bg: Background, dpi: number): Promise<HTMLCanvasElement> {
+  return withFirstPdfPage(bg.bytes, (page) => renderPage(page, dpi))
 }

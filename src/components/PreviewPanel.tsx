@@ -30,6 +30,7 @@ interface Props {
   nameLayer: TextLayer
   customFontName: string | null
   showGuides: boolean
+  previewIndex: number
   update: UpdateState
 }
 
@@ -61,6 +62,7 @@ export const PreviewPanel = memo(function PreviewPanel({
   nameLayer,
   customFontName,
   showGuides,
+  previewIndex,
   update,
 }: Props) {
   const stageRef = useRef<HTMLDivElement>(null)
@@ -68,7 +70,6 @@ export const PreviewPanel = memo(function PreviewPanel({
   const nameCanvasRef = useRef<HTMLCanvasElement>(null)
   const dragRef = useRef<Drag | null>(null)
   const [cssWidth, setCssWidth] = useState(0)
-  const [position, setPosition] = useState(0)
   const [fontVersion, setFontVersion] = useState(0)
   const [stepMm, setStepMm] = useState<number>(1)
   const [hoverName, setHoverName] = useState(false)
@@ -82,7 +83,8 @@ export const PreviewPanel = memo(function PreviewPanel({
         .filter((r) => r.text.length > 0),
     [names],
   )
-  const current = Math.min(position, Math.max(rows.length - 1, 0))
+  const current = Math.min(previewIndex, Math.max(rows.length - 1, 0))
+  const setPosition = (index: number) => update({ previewIndex: index })
   const currentText = rows[current]?.text ?? SAMPLE_NAME
 
   // Cheap to measure one name, so it runs every render. A font finishing

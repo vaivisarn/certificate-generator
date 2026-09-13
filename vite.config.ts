@@ -15,6 +15,11 @@ export default defineConfig({
     // Shown in the footer so team feedback can name a version.
     __APP_VERSION__: JSON.stringify(pkg.version),
   },
+  optimizeDeps: {
+    // Export code loads on demand. Listing its libraries here stops the dev
+    // server from reloading the page the first time someone exports.
+    include: ['pdf-lib', 'fflate'],
+  },
   test: {
     include: ['tests/**/*.test.ts'],
   },

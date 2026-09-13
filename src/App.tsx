@@ -1,4 +1,11 @@
+import { useCallback, useState } from 'react'
+import { BackgroundPanel } from './components/BackgroundPanel'
+import { initialState, type CertificateState, type UpdateState } from './state/certificate'
+
 function App() {
+  const [state, setState] = useState<CertificateState>(initialState)
+  const update = useCallback<UpdateState>((patch) => setState((s) => ({ ...s, ...patch })), [])
+
   return (
     <div className="app">
       <header className="app-header">
@@ -10,7 +17,7 @@ function App() {
         <div className="column">
           <section className="panel" aria-labelledby="panel-background">
             <h2 id="panel-background">1. Background</h2>
-            <p className="placeholder">Upload a PNG, JPG or single page PDF. Coming in step 3.</p>
+            <BackgroundPanel state={state} update={update} />
           </section>
 
           <section className="panel" aria-labelledby="panel-names">

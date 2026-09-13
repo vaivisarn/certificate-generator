@@ -88,6 +88,166 @@ h3 {
   color: var(--muted);
 }
 
+.muted {
+  color: var(--muted);
+}
+
+button {
+  font: inherit;
+  font-size: 14px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button-row {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Background panel */
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 28px 16px;
+  text-align: center;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.dropzone:hover,
+.dropzone.is-over {
+  border-color: var(--accent);
+  background: #eef4fc;
+}
+
+.dropzone .hint {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.background-loaded {
+  border-radius: var(--radius);
+}
+
+.background-loaded.is-over {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}
+
+.thumb {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.file-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.file-name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.messages {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.message {
+  margin: 8px 0 0;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  border-left: 3px solid;
+}
+
+.messages .message {
+  margin: 0;
+}
+
+.message-ok {
+  background: #ecf7ef;
+  border-color: #3c9a5f;
+}
+
+.message-info {
+  background: #eef3fa;
+  border-color: #7a9cc9;
+}
+
+.message-warn {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+}
+
+.fit-options {
+  margin: 12px 0 0;
+  padding: 8px 10px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.fit-options legend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+.radio {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .app-footer {
   display: flex;
   justify-content: space-between;

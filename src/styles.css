@@ -503,6 +503,239 @@ button.icon:hover:not(:disabled) {
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.preview-stage:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.preview-stage.over-name {
+  cursor: grab;
+}
+
+.preview-stage.is-dragging {
+  cursor: grabbing;
+}
+
+.preview-stage {
+  touch-action: none;
+}
+
+.guide-maxwidth line {
+  stroke: #e0457b;
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.8;
+}
+
+.guide-namebox {
+  fill: rgba(31, 95, 191, 0.06);
+  stroke: var(--accent);
+  stroke-width: 1px;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.preview > .messages {
+  margin-top: 10px;
+}
+
+/* Placement controls */
+
+.placement {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.placement-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 36px);
+  grid-template-rows: repeat(3, 36px);
+  gap: 3px;
+}
+
+.dpad button {
+  padding: 0;
+  font-size: 17px;
+}
+
+.dpad-up {
+  grid-area: 1 / 2;
+}
+
+.dpad-left {
+  grid-area: 2 / 1;
+}
+
+.dpad-right {
+  grid-area: 2 / 3;
+}
+
+.dpad-down {
+  grid-area: 3 / 2;
+}
+
+.placement-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.segmented {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.segmented .number-label {
+  margin-right: 4px;
+}
+
+.segmented button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.number-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.number-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.number-input {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.number-input:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.number-input input {
+  width: 72px;
+  font: inherit;
+  font-size: 14px;
+  padding: 5px 6px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit {
+  padding-right: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Style panel */
+
+.style {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+select {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.font-load {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+button {
+  white-space: nowrap;
+}
+
+.hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.colour-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.colour-inputs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.colour-inputs input[type='color'] {
+  width: 34px;
+  height: 30px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.colour-inputs .hex {
+  width: 80px;
+  font: inherit;
+  font-size: 14px;
+  padding: 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.shrink .messages {
+  margin-top: 4px;
+}
+
+.export-placeholder {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
 }
 
 .app-footer {

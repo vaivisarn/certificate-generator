@@ -1,20 +1,22 @@
-import { useEffect, useRef, useState, type DragEvent } from 'react'
-import { BackgroundError, loadBackground } from '../lib/background'
+import { memo, useEffect, useRef, useState, type DragEvent } from 'react'
+import { BackgroundError, loadBackground, type Background } from '../lib/background'
 import { checkBackground } from '../lib/backgroundChecks'
 import { drawBackground } from '../lib/drawPage'
 import { checkRatio, PAGE_H_MM, PAGE_W_MM, type BackgroundFit } from '../lib/geometry'
-import type { CertificateState, UpdateState } from '../state/certificate'
+import type { UpdateState } from '../state/certificate'
 
 const ACCEPT = '.png,.jpg,.jpeg,.pdf,image/png,image/jpeg,application/pdf'
 const THUMB_WIDTH_PX = 300
 
 interface Props {
-  state: CertificateState
+  background: Background | null
+  backgroundFit: BackgroundFit
   update: UpdateState
 }
 
-export function BackgroundPanel({ state, update }: Props) {
-  const { background, backgroundFit } = state
+export const BackgroundPanel = memo(BackgroundPanelView)
+
+function BackgroundPanelView({ background, backgroundFit, update }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const thumbRef = useRef<HTMLCanvasElement>(null)
   const [loading, setLoading] = useState(false)

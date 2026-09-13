@@ -37,7 +37,10 @@ export interface CertificateState {
   /** Participant names in export order. Never saved to disk or storage. */
   names: string[]
   nameLayer: TextLayer
-  showSafeArea: boolean
+  /** Label of a font file the user loaded. Null until one is loaded. */
+  customFontName: string | null
+  /** Safe area, max width and anchor guides on the preview. */
+  showGuides: boolean
 }
 
 export const initialState: CertificateState = {
@@ -45,7 +48,8 @@ export const initialState: CertificateState = {
   backgroundFit: 'fit',
   names: [],
   nameLayer: defaultNameLayer,
-  showSafeArea: true,
+  customFontName: null,
+  showGuides: true,
 }
 
 export type UpdateState = (patch: Partial<CertificateState>) => void

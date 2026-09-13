@@ -1,17 +1,18 @@
-import { useEffect, useMemo, useRef, useState, type ClipboardEvent } from 'react'
+import { memo, useEffect, useMemo, useRef, useState, type ClipboardEvent } from 'react'
 import { cleanName, countDuplicates, findDuplicates, parseNames } from '../lib/parseNames'
-import type { CertificateState, UpdateState } from '../state/certificate'
+import type { UpdateState } from '../state/certificate'
 
 /** Above this the app still works, but exports get slow and large. */
 export const NAMES_SOFT_LIMIT = 500
 
 interface Props {
-  state: CertificateState
+  names: string[]
   update: UpdateState
 }
 
-export function NamesPanel({ state, update }: Props) {
-  const { names } = state
+export const NamesPanel = memo(NamesPanelView)
+
+function NamesPanelView({ names, update }: Props) {
   const [draft, setDraft] = useState('')
   const pendingFocusRow = useRef<number | null>(null)
   const tableRef = useRef<HTMLTableSectionElement>(null)

@@ -2,12 +2,15 @@ import { useCallback, useState } from 'react'
 import { BackgroundPanel } from './components/BackgroundPanel'
 import { NamesPanel } from './components/NamesPanel'
 import { PreviewPanel } from './components/PreviewPanel'
+import { StylePanel } from './components/StylePanel'
 import { initialState, type CertificateState, type UpdateState } from './state/certificate'
 
 function App() {
   const [state, setState] = useState<CertificateState>(initialState)
   const update = useCallback<UpdateState>((patch) => setState((s) => ({ ...s, ...patch })), [])
 
+  // Each panel gets only the values it uses, so dragging the name does not
+  // redraw the names table.
   return (
     <div className="app">
       <header className="app-header">
@@ -19,23 +22,37 @@ function App() {
         <div className="column">
           <section className="panel" aria-labelledby="panel-background">
             <h2 id="panel-background">1. Background</h2>
-            <BackgroundPanel state={state} update={update} />
+            <BackgroundPanel background={state.background} backgroundFit={state.backgroundFit} update={update} />
           </section>
 
           <section className="panel" aria-labelledby="panel-names">
             <h2 id="panel-names">2. Names</h2>
-            <NamesPanel state={state} update={update} />
+            <NamesPanel names={state.names} update={update} />
           </section>
         </div>
 
         <section className="panel panel-preview" aria-labelledby="panel-preview">
           <h2 id="panel-preview">3. Preview and placement</h2>
-          <PreviewPanel state={state} update={update} />
+          <PreviewPanel
+            background={state.background}
+            backgroundFit={state.backgroundFit}
+            names={state.names}
+            nameLayer={state.nameLayer}
+            customFontName={state.customFontName}
+            showGuides={state.showGuides}
+            update={update}
+          />
         </section>
 
         <section className="panel" aria-labelledby="panel-style">
           <h2 id="panel-style">4. Style and export</h2>
-          <p className="placeholder">Font, size, colour and export buttons. Coming in steps 6 and 7.</p>
+          <StylePanel
+            names={state.names}
+            nameLayer={state.nameLayer}
+            customFontName={state.customFontName}
+            update={update}
+          />
+          <p className="placeholder export-placeholder">Export buttons coming in step 7.</p>
         </section>
       </main>
 

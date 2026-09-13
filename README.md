@@ -10,6 +10,12 @@ Live site: https://vaivisarn.github.io/certificate-generator/
 
 Everything runs in the browser. There is no server and no database. Backgrounds and participant names never leave your computer. Names are not saved in the browser or in template files.
 
+## Templates and remembered settings
+
+- **Save template** downloads a small JSON file with the name position and style (font, size, colour, bold, max width, fit or fill). It does not contain names or the background image, so it is safe to share with the team.
+- **Load template** applies a saved layout. If the layout used a custom font file, load that font again in Style.
+- The last layout is also remembered in this browser, so a reload keeps it. **Reset layout** goes back to the defaults.
+
 ## Run locally
 
 You need Node.js (LTS) installed.

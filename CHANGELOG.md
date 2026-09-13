@@ -22,3 +22,5 @@ All notable changes to this project are listed here. Versions follow [Semantic V
 - Export: one combined PDF, a ZIP of one PDF per person (`001_Name.pdf`), a ZIP of 300 DPI PNGs, or a single PNG of the name in the preview. Progress bar, Cancel, and a size estimate for large PNG runs.
 - PDF pages are exactly A4 landscape (841.89 x 595.28 pt). The background is embedded once and reused on every page. Names are placed as 600 DPI images so Thai vowels and tone marks print exactly as previewed.
 - Rotated phone photos (EXIF) and unusual backgrounds are redrawn upright before they go into the PDF.
+- Save and load the layout as a JSON template (position and style only, never names or the background). Bad or older files load with defaults for anything missing.
+- The last layout is remembered in the browser. Reset layout returns to the defaults.

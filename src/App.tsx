@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { BackgroundPanel } from './components/BackgroundPanel'
+import { NamesPanel } from './components/NamesPanel'
 import { initialState, type CertificateState, type UpdateState } from './state/certificate'
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 
           <section className="panel" aria-labelledby="panel-names">
             <h2 id="panel-names">2. Names</h2>
-            <p className="placeholder">Paste names copied from Excel. Coming in step 4.</p>
+            <NamesPanel state={state} update={update} />
           </section>
         </div>
 

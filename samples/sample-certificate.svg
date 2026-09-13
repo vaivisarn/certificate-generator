@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3508" height="2480" viewBox="0 0 297 210">
+  <!-- Generic sample background for tests and screenshots. No real branding. -->
+  <rect width="297" height="210" fill="#fbf8f1"/>
+  <rect x="8" y="8" width="281" height="194" fill="none" stroke="#1f3a5f" stroke-width="1.6"/>
+  <rect x="11" y="11" width="275" height="188" fill="none" stroke="#b8963e" stroke-width="0.5"/>
+
+  <text x="148.5" y="48" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="16" letter-spacing="1.5" fill="#1f3a5f">CERTIFICATE</text>
+  <text x="148.5" y="59" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="6" letter-spacing="2" fill="#b8963e">OF COMPLETION</text>
+
+  <text x="148.5" y="82" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="4.2" fill="#555">This is to certify that</text>
+
+  <!-- Name goes here, centred on x 148.5, y 105 -->
+  <line x1="78" y1="115" x2="219" y2="115" stroke="#b8963e" stroke-width="0.35"/>
+
+  <text x="148.5" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="4.2" fill="#555">has completed the Sample Training Workshop</text>
+
+  <line x1="50" y1="170" x2="110" y2="170" stroke="#1f3a5f" stroke-width="0.3"/>
+  <text x="80" y="176" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="3.4" fill="#555">Date</text>
+  <line x1="187" y1="170" x2="247" y2="170" stroke="#1f3a5f" stroke-width="0.3"/>
+  <text x="217" y="176" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="3.4" fill="#555">Signature</text>
+
+  <circle cx="148.5" cy="168" r="11" fill="none" stroke="#b8963e" stroke-width="0.8"/>
+  <circle cx="148.5" cy="168" r="8.5" fill="none" stroke="#b8963e" stroke-width="0.3"/>
+  <text x="148.5" y="169.5" text-anchor="middle" font-family="Georgia, serif" font-size="3.2" fill="#b8963e">SAMPLE</text>
+</svg>

@@ -1,0 +1,41 @@
+function App() {
+  return (
+    <div className="app">
+      <header className="app-header">
+        <h1>Certificate Generator</h1>
+        <p className="tagline">A4 landscape certificates in bulk. Everything stays on this computer.</p>
+      </header>
+
+      <main className="layout">
+        <div className="column">
+          <section className="panel" aria-labelledby="panel-background">
+            <h2 id="panel-background">1. Background</h2>
+            <p className="placeholder">Upload a PNG, JPG or single page PDF. Coming in step 3.</p>
+          </section>
+
+          <section className="panel" aria-labelledby="panel-names">
+            <h2 id="panel-names">2. Names</h2>
+            <p className="placeholder">Paste names copied from Excel. Coming in step 4.</p>
+          </section>
+        </div>
+
+        <section className="panel panel-preview" aria-labelledby="panel-preview">
+          <h2 id="panel-preview">3. Preview and placement</h2>
+          <p className="placeholder">Live A4 preview. Coming in step 5.</p>
+        </section>
+
+        <section className="panel" aria-labelledby="panel-style">
+          <h2 id="panel-style">4. Style and export</h2>
+          <p className="placeholder">Font, size, colour and export buttons. Coming in steps 6 and 7.</p>
+        </section>
+      </main>
+
+      <footer className="app-footer">
+        <span>v{__APP_VERSION__}</span>
+        <span>Files are processed in your browser. Nothing is uploaded.</span>
+      </footer>
+    </div>
+  )
+}
+
+export default App

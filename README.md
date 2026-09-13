@@ -21,7 +21,7 @@ npm run dev
 
 `npm install` downloads the libraries listed in `package.json` into `node_modules`. Run it once, and again after pulling changes that add libraries.
 
-`npm run dev` starts a local preview server. Open the address it prints (usually http://localhost:5173). The page reloads by itself when you edit code.
+`npm run dev` starts a local preview server. Open the address it prints (usually http://localhost:5173/certificate-generator/). The page reloads by itself when you edit code.
 
 ## Build
 
@@ -30,6 +30,10 @@ npm run build
 ```
 
 This checks the TypeScript types and writes the finished site to `dist/`. GitHub Actions runs the same command before every deploy, so if it fails locally it will fail online too.
+
+## Deploy
+
+`.github/workflows/deploy.yml` runs on every push to `main`: install, unit tests, build, then publish `dist/` to GitHub Pages. Progress shows under the Actions tab on GitHub. A failed test or build stops the deploy, so the live site keeps the last good version.
 
 To look at the built site before pushing:
 

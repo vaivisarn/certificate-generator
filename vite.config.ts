@@ -8,6 +8,8 @@ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 
 
 // https://vite.dev/config/
 export default defineConfig({
+  // GitHub Pages serves the site from a sub path, not the domain root.
+  base: '/certificate-generator/',
   plugins: [react()],
   define: {
     // Shown in the footer so team feedback can name a version.

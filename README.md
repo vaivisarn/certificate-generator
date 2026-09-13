@@ -49,21 +49,17 @@ npm run preview
 
 ## Test
 
+Unit tests:
+
 ```bash
 npm test
 ```
 
-Runs the unit tests with Vitest: the Excel paste parser, ratio and resolution checks, mm maths, automatic shrink, file names and templates. GitHub Actions runs these before every deploy.
+End to end tests (needs Google Chrome):
 
 ```bash
 npm run test:e2e
 ```
-
-Runs the end to end tests with Playwright against the production build. They load the sample background, enter 500 mixed Thai and English names, export, and check that the PDF has 500 pages of exactly 841.89 x 595.28 pt, that short and long names are centred, and that long names shrink. They also check the per person ZIP, PNG export, Excel paste and templates. About 20 seconds.
-
-The tests use the Google Chrome installed on your computer. Without Chrome, run `npx playwright install chromium` once and then `PW_BUNDLED=1 npm run test:e2e`.
-
-A few exported pages are saved as PNG in `test-results/` so you can check the Thai marks by eye.
 
 ## Release
 

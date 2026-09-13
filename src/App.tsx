@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { BackgroundPanel } from './components/BackgroundPanel'
 import { NamesPanel } from './components/NamesPanel'
+import { PreviewPanel } from './components/PreviewPanel'
 import { initialState, type CertificateState, type UpdateState } from './state/certificate'
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
 
         <section className="panel panel-preview" aria-labelledby="panel-preview">
           <h2 id="panel-preview">3. Preview and placement</h2>
-          <p className="placeholder">Live A4 preview. Coming in step 5.</p>
+          <PreviewPanel state={state} update={update} />
         </section>
 
         <section className="panel" aria-labelledby="panel-style">
